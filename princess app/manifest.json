@@ -1,0 +1,19 @@
+{
+  "name": "Sunny Steps",
+  "short_name": "Sunny Steps",
+  "description": "Educational kids game for ages 3 to 10. Plays offline.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#8fd3ee",
+  "theme_color": "#f4b942",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

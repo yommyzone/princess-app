@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#f4b942">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Sunny Steps">
+  <meta name="description" content="Sunny Steps is a free offline kids game for ages 3 to 10. Letters, numbers, shapes, words, and math in Easy, Medium, and Hard.">
+  <title>Sunny Steps</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="style.css?v=5">
+</head>
+<body>
+  <div class="bg" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+  </div>
+
+  <div id="app">
+    <header class="bar">
+      <button id="backBtn" class="round hidden" type="button" aria-label="Go back">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M15 5l-8 7 8 7"/></svg>
+      </button>
+      <div class="title-wrap">
+        <h1 id="pageTitle">Sunny Steps</h1>
+        <p id="pageSub" class="sub">Play. Learn. Grow.</p>
+      </div>
+      <div class="bar-right">
+        <div class="star-pill" id="starPill" title="Stars collected">
+          <span class="star-icon" aria-hidden="true"></span>
+          <span id="starCount">0</span>
+        </div>
+        <button id="stickerBtn" class="round" type="button" aria-label="Sticker book">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="#f4b942" stroke="#c4841a" stroke-width="1.4"><path d="M12 2.4l2.7 6.4 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.99 20.6l1.6-6.7L2.4 9.4l6.9-.6z"/></svg>
+        </button>
+        <button id="soundBtn" class="round" type="button" aria-label="Toggle sound" aria-pressed="true">
+          <svg id="icoOn" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 10v4h4l5 4V6L8 10H4z"/><path d="M16 9a4 4 0 010 6"/><path d="M18.5 7a7 7 0 010 10"/></svg>
+          <svg id="icoOff" class="hidden" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 10v4h4l5 4V6L8 10H4z"/><path d="M17 9l5 6M22 9l-5 6"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="screen">
+        <div class="hero">
+          <div class="sunny" id="heroSunny" aria-hidden="true">
+            <div class="rays"></div>
+            <div class="face">
+              <span class="eye"></span>
+              <span class="eye"></span>
+              <span class="smile"></span>
+            </div>
+          </div>
+          <p class="welcome">Hi! I am Sunny. Pick a path and we will learn together.</p>
+        </div>
+        <p class="label">How grown-up are you today?</p>
+        <div class="modes" role="list">
+          <button class="mode" data-mode="easy" type="button" onclick="window.pickMode && window.pickMode('easy')">
+            <span class="mode-badge easy">Easy</span>
+            <span class="mode-age">Ages 3 to 5</span>
+            <span class="mode-note">Letters, tracing, counting, colors</span>
+          </button>
+          <button class="mode" data-mode="medium" type="button" onclick="window.pickMode && window.pickMode('medium')">
+            <span class="mode-badge med">Medium</span>
+            <span class="mode-age">Ages 6 to 7</span>
+            <span class="mode-note">Words, adding, patterns, numbers to 20</span>
+          </button>
+          <button class="mode" data-mode="hard" type="button" onclick="window.pickMode && window.pickMode('hard')">
+            <span class="mode-badge hard">Hard</span>
+            <span class="mode-age">Ages 8 to 10</span>
+            <span class="mode-note">Spelling, multiplication, number puzzles</span>
+          </button>
+        </div>
+      </section>
+
+      <section id="topics" class="screen hidden">
+        <p class="label" id="topicLabel">Choose a game</p>
+        <div id="topicGrid" class="topics"></div>
+      </section>
+
+      <section id="play" class="screen hidden">
+        <div class="progress" aria-hidden="true">
+          <div id="progFill"></div>
+        </div>
+        <p class="q-count" id="qCount">1 / 8</p>
+        <div class="prompt-card">
+          <button id="speakBtn" class="speak" type="button" aria-label="Hear the question">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 10v4h4l5 4V6L8 10H4z"/><path d="M16 9a4 4 0 010 6"/></svg>
+          </button>
+          <p id="qText" class="q-text"></p>
+          <div id="qVisual" class="q-visual"></div>
+        </div>
+        <div id="choices" class="choices"></div>
+        <p id="feedback" class="feedback" aria-live="polite"></p>
+      </section>
+    </main>
+  </div>
+
+  <div id="stickers" class="sheet hidden" role="dialog" aria-labelledby="stickerTitle">
+    <div class="sheet-card">
+      <h2 id="stickerTitle">Sticker book</h2>
+      <p class="sheet-note">Win games to collect them all.</p>
+      <div id="stickerGrid" class="sticker-grid"></div>
+      <button id="closeStickers" class="btn" type="button">Close</button>
+    </div>
+  </div>
+
+  <div id="result" class="sheet hidden" role="dialog" aria-labelledby="resultTitle">
+    <div class="sheet-card result-card">
+      <div class="sunny mini" id="resultSunny" aria-hidden="true">
+        <div class="rays"></div>
+        <div class="face"><span class="eye"></span><span class="eye"></span><span class="smile"></span></div>
+      </div>
+      <h2 id="resultTitle">You did it!</h2>
+      <p id="resultMsg"></p>
+      <div id="resultStars" class="stars"></div>
+      <p id="starBank" class="star-bank"></p>
+      <div id="newSticker" class="new-sticker hidden"></div>
+      <div class="result-actions">
+        <button id="againBtn" class="btn primary" type="button">Play again</button>
+        <button id="topicsBtn" class="btn" type="button">More games</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js?v=5"></script>
+  <script>
+    if (typeof window.pickMode !== "function") {
+      document.querySelectorAll(".mode").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          alert("Game did not load. Please refresh.");
+        });
+      });
+    }
+  </script>
+</body>
+</html>
